@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
+import { Container, Conteudo, Header, Form, Campo, Label, Input, Select, BtnAcessar, HeaderChat, ImgUsuario } from './styles/styles';
 
 let socket;
 
@@ -53,40 +54,55 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Chat</h1>
+    <Container>
+      
       {!logado ? 
-      <>
-        <label>Nome: </label>
-        <input type="text" placeholder="Nome" name="nome" value={nome} onChange={(texto) => {setNome(texto.target.value)}
-        } /> <br /><br />
-        <label>Sala: </label>
-        {/* <input type="text" placeholder="Sala" value={sala} onChange={(text) => {setSala(text.target.value)}
-        } /> <br /><br /> */}
-        <select name="sala" value={sala} onChange={texto => setSala(texto.target.value)}>
-          <option value="">Selecione</option>
-          <option value="1">Node.js</option>
-          <option value="2">React.js</option>
-          <option value="3">React Native</option>
-          <option value="4">PHP</option>
-        </select><br /><br />
-        <button onClick={conectarSala}>Acessar</button>
-      </>
+      <Conteudo>
+        <Header>Meu chat sobre...</Header>
+        <Form>
+          <Campo>
+            <Label>Nome: </Label>
+            <Input 
+              type="text" 
+              placeholder="Nome" 
+              name="nome" 
+              value={nome} 
+              onChange={(texto) => {setNome(texto.target.value)}} 
+            /> 
+          </Campo>
+          <Campo>
+            <Label>Sala: </Label>
+            {/* <input type="text" placeholder="Sala" value={sala} onChange={(text) => {setSala(text.target.value)}
+            } /> <br /><br /> */}
+            <Select name="sala" value={sala} onChange={texto => setSala(texto.target.value)}>
+              <option value="">Selecione</option>
+              <option value="1">Node.js</option>
+              <option value="2">React.js</option>
+              <option value="3">React Native</option>
+              <option value="4">PHP</option>
+            </Select>
+          </Campo>
+          <BtnAcessar onClick={conectarSala}>Acessar</BtnAcessar>
+        </Form>
+      </Conteudo>
       : 
-      <>
-      {/* Envia as mensagens para o Back-end*/}
-      {listaMensagem.map((msg, key) => {
-        return (
-          <div key={key}>
-            {msg.nome}: {msg.mensagem}
-          </div>
-        )
-      })}
-        <input type="text" name="mensagem" value={mensagem} placeholder="Mensagem..." onChange={(texto) => {setMensagem(texto.target.value)}} />
-        <button onClick={enviarMensagem}>Enviar</button>
-      </>
+      <Conteudo>
+        <HeaderChat>
+          <ImgUsuario src="h23.jpg" alt={nome} />
+        </HeaderChat>
+        {/* Envia as mensagens para o Back-end*/}
+        {listaMensagem.map((msg, key) => {
+          return (
+            <div key={key}>
+              {msg.nome}: {msg.mensagem}
+            </div>
+          )
+        })}
+          <input type="text" name="mensagem" value={mensagem} placeholder="Mensagem..." onChange={(texto) => {setMensagem(texto.target.value)}} />
+          <button onClick={enviarMensagem}>Enviar</button>
+      </Conteudo>
       }
-    </div>
+    </Container>
   );
 }
 
