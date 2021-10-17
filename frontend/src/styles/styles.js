@@ -66,8 +66,12 @@ export const BtnAcessar = styled.button`
   cursor: pointer;
 `;
 
+export const ConteudoChat = styled.section`
+  padding: 25px 0px;
+`;
+
 export const HeaderChat = styled.header`
-  whidth: 450px;
+  width: 450px;
   display: flex;
   align-items: center;
   padding: 18px 30px;
@@ -78,4 +82,98 @@ export const ImgUsuario = styled.img`
   height: 45px;
   width: 45px;
   margin: 0 15px;
+`;
+
+export const NomeUsuario = styled.div`
+  font-size: 17px;
+  font-weight: 500;
+`;
+
+export const ChatBox = styled.div`
+  position: relative;
+  min-height: 500px;
+  max-height:500px;
+  overflow-y: auto;
+  padding: 10px 10px 20px 10px;
+  background: #F7F7F7;
+  box-shadow: insert 0 32px 32px -32px rgb(0 0 0 / 5%),
+                        insert 0 -32px 32px -32px rgb(0 0 0 / 5%);
+`;
+
+export const MsgEnviada = styled.div`
+  margin: 15px 14px 15px 0;
+  display: flex;
+`;
+
+export const DetMsgEnviada = styled.div`
+  margin-left: auto;
+  max-width: calc(100% - 130px);
+`;
+
+export const TextoMsgEnviada = styled.p`
+  background: #6FBCED;
+  color: #FFF;
+  border-radius: 18px 18px 0 18px;
+  word-wrap: break-word;
+  padding: 8px 16px;
+  box-shadow: 0 0 32px rgb(0 0 0 / 8%),
+                        0rem 16px 16px -16px rgb(0 0 0 / 10%);
+`;
+
+export const MsgRecebida = styled.div`
+  margin: 15px 0;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const DetMsgRecebida = styled.div`
+  margin-right: auto;
+  margin-left: 10px;
+  max-width: calc(100% - 130px);
+`;
+
+export const TextoMsgRecebida = styled.p`
+  background: #58B666;
+  color: #FFF;
+  border-radius: 18px 18px 18px 0;
+  word-wrap: break-word;
+  padding: 8px 16px;
+  box-shadow: 0 0 32px rgba(0 0 0 / 8%),
+                        0rem 16px 16px -16px rgb(0 0 0 / 10%);
+`;
+
+export const FooterChat = styled.footer`
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background: #FFF;
+`;
+
+export const EnviarMsg = styled.div`
+  padding: 18px 15px:
+  display: flex;
+`;
+
+export const CampoMsg = styled.input`
+  height: 45px;
+  width: calc(100% - 75px);
+  font-size: 16px;
+  padding: 0 13px;
+  border: 1px solid #E6E6E6;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+`;
+
+export const BtnEnviarMsg = styled.button`
+  color: #FFF;
+  height: 45px;
+  width: 75px;
+  border: none;
+  outline: none;
+  background: #6FBCED;
+  font-size: 19px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
 `;
