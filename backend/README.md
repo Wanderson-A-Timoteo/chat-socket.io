@@ -42,7 +42,23 @@ Permite acesso a API
 npm install cors
 ```
 
+Instalar o Banco de Dados MySQL
 
+Verificar o Banco de Dados MySQL no pronpt de comando
+```
+mysql -h localhost -u root -p
+```
 
+Instalar o Workbench para gerenciar o Banco de Dados de forma gráfica
+
+Squelize é uma biblioteca Javascript que facilita o gerenciamento de um Banco de Dados SQL
+```
+npm install --save sequelize
+```
+
+Instalar o drive do Banco de Dados MySQL
+```
+npm install --save mysql2
+```
 
 

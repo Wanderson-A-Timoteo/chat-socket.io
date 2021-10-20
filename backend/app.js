@@ -3,6 +3,8 @@ const socket = require('socket.io');
 const cors = require('cors')
 const app = express();
 
+const Usuario = require('./models/Usuario');
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -15,6 +17,58 @@ app.use((req, res, next) => {
 
 app.get('/', function(req, res) {
   res.send('Bem vindo! Wanderson');
+});
+
+app.post('/cadastrar-usuario', async(req, res) => {
+  var dados = req.body;
+  
+  const usuario = await Usuario.findOne({
+    where: {
+      email: dados.email
+    }
+  });
+
+  if(usuario) {
+    return res.status(400).json({
+      erro: true,
+      mensagem: "ERRO: Este e-mail já está cadastrado!"
+    });
+  }
+
+  await Usuario.create(dados)
+  .then(() => {
+    return res.json({
+      erro: false,
+      mensagem: "Usuário cadastrado com sucesso!"
+    });
+  }).catch(() => {
+    return res.status(400).json({
+      erro: true,
+      mensagem: "ERRO: Usuário não cadastrado!"
+    });
+  });
+});
+
+app.post('/validar-acesso', async(req, res) => {
+  const usuario = await Usuario.findOne({
+    attributes: ['id', 'nome'],
+    where: {
+      email: req.body.email
+    }
+  });
+
+  if(usuario === null) {
+    return res.status(400).json({
+      erro: true,
+      mensagem: "ERRO: Usuário não encontrado!"
+    });
+  };
+
+  return res.json({
+    erro: false,
+    mensagem: "Login realizado com sucesso!",
+    usuario
+  });
 });
 
 const server = app.listen(8000, () => {
