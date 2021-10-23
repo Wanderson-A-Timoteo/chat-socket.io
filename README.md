@@ -328,10 +328,10 @@ Feito com ♥ by
 ## Agradecimentos:
 
 <h1 align="center">
-    <img alt="" title="" src=".github/" />
+    <img alt="Celke-Logo" title="Celke-Logo" src=".github/Celke-Logo.png" />
 </h1>
 
-- Projeto desenvolvido [](https://).
+- Projeto desenvolvido durante a [Imersão React, Node e React Native 12.0](https://celke.com.br/home).
 
-- Agradecimento a [](https://) por compartilhar conteúdo relevante e com qualidade de ensino.
+- Agradecimento ao [Cesar Celke](https://www.instagram.com/celkecursos/) por compartilhar conteúdo relevante e com qualidade de ensino.
 
