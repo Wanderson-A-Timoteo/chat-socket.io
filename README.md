@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="FlixPrime" title="FlixPrime" src=".github/devFreela.png" />
+    <img alt="Chat-Socket.io" title="Chat-Socket.io" src=".github/Chat-Socket.io.png" />
 </h1>
 
 <p align="center">
@@ -18,15 +18,7 @@
 
 ## 💻 Projeto
 
-O projeto foi desenvolvido como atividade avaliativa para a disciplina de Programação em Ambiente Web II. <br><br>
-Esta aplicação chama-se devFreela, consiste em um sistema para encontrar um programador freelancer mais proximo de você. <br><br>
-Cada cidade no Brasil, possui um código IBGE diferente, e para encontrar o freelancer mais próximo o sistema é integrado ao webservice do [ViaCEP](https://viacep.com.br/), 
-para realizar consultas de CEP e assim pelo código IBGE do CEP pesquisado, o sistema busca no banco de dados os freelancers que possuem o mesmo código IBGE e mostra ao usuário.<br>
-<br>
-O banckend (API) foi desenvolvido em PHP, utilizando o framework Laravel 8, também foi desenvolvido a validação no preenchimento do formulário. <br>  
-O frontend foi desenvolvido em React.js e Next.js. 💜
-<br><br>
-O mobile foi desenvolvido em React Native e Expo, foi usado Location nativo do Expo para solicitar permissão ao usuario pegar suas coordenadas de geolocalização e realizar a busca dos freelancers de forma automatica. <br>
+O projeto consiste em um chat de mensagens instantâneas, utilizando socket.io.
 
 As pessoas nas imagens usadas no sistema não existem, foram retiradas do site!
 - [This person do es not exist](https://thispersondoesnotexist.com/)
@@ -147,30 +139,18 @@ expo install expo-location
 
 ## Prévia vizualização do Front-end
 Tela inicial do sistema.
-<p align="center">
+
+<h1 align="center">
+    <img alt="Chat-Socket.io" title="Chat-Entrar" src=".github/Chat-Entrar.png" />
+</h1>
+
+<h1 align="center">
+    <img alt="Chat-Socket.io" title="Chat-Socket.io" src=".github/Chat.png" />
+</h1>
+
+<!-- <p align="center">
     <img alt="devFreela" title="devFreela" src="https://github.com/Wanderson-A-Timoteo/devfreela/blob/main/.github/devFreela-frontend.PNG?raw=true" />
-</p>
-<br>
-
----
-
-<br>
-
-Retornando os dados da API.
-<p align="center">
-    <img alt="devFreela" title="devFreela" src="https://github.com/Wanderson-A-Timoteo/devfreela/blob/main/.github/devFreela-frontend2.PNG?raw=true" />
-</p>
-<br>
-
----
-
-<br>
-
-## Prévia vizualização do Back-end
-Tela administrativa do sistema.
-<p align="center">
-    <img alt="devFreela" title="devFreela" src="https://github.com/Wanderson-A-Timoteo/devfreela/blob/main/.github/devFreela-backend.PNG?raw=true" />
-</p>
+</p> -->
 <br>
 
 ---
@@ -182,14 +162,21 @@ Tela administrativa do sistema.
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - [Node.js](https://nodejs.org/en/)
+- [Express](http://expressjs.com/pt-br/)
 - [React.js](https://reactjs.org/)
 - [MySQL](https://www.mysql.com/)
 - [Sequelize](https://sequelize.org/master/)
-- [Styled Components](https://styled-components.com/)
 - [Axios](https://axios-http.com/)
+- [Cors](https://www.npmjs.com/package/cors#installation)
+- [Socket.io](https://socket.io/)
+- [Nodemon](https://nodemon.io/)
+- [Styled Components](https://styled-components.com/)
+- [React Scroll to Bottom](https://www.npmjs.com/package/react-scroll-to-bottom)
 - [Expo](https://expo.dev/)
 - [React Native](https://reactnative.dev/)
 - [React Native Paper](https://reactnativepaper.com/)
+
+
 
 <br>
 
