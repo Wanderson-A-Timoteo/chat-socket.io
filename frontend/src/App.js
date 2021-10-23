@@ -25,6 +25,7 @@ import {
   EnviarMsg,
   CampoMsg,
   BtnEnviarMsg } from './styles/styles';
+  import api from './config/configApi';
 
 let socket;
 
@@ -33,7 +34,9 @@ function App() {
   const ENDPOINT = "http://localhost:8000/";
 
   const [logado, setLogado] = useState(false);
+  const [setUsuarioId] = useState(" ");
   const [nome, setNome] = useState(" ");
+  const [email, setEmail] = useState(" ");
   const [sala, setSala] = useState(" ");
 
   // const [logado, setLogado] = useState(true);
@@ -55,11 +58,33 @@ function App() {
   });
 
  // Envia a sala para o Back-end
-  const conectarSala = () => {
-    console.log("Acessou a sala " + sala + " com o nome " + nome);
-    setLogado(true);
-    // Metodo para enviar para o Back-end 
-    socket.emit("sala_conectar", sala);
+  const conectarSala = async e => {
+    e.preventDefault();
+
+    console.log("Acessou a sala " + sala + " com o e-mail " + email);
+    
+    const headers = {
+      'Content-Type': 'application/json'
+    }  
+    
+    await api.post('/validar-acesso', {email}, {headers})
+    .then((response) => {
+      console.log(response.data.mensagem);
+      console.log(response.data.usuario.id);
+      console.log(response.data.usuario.nome);
+
+      setNome(response.data.usuario.nome);
+      setUsuarioId(response.data.usuario.id);
+      setLogado(true);
+      // Metodo para enviar para o Back-end 
+      socket.emit("sala_conectar", sala);
+    }).catch((err) => {
+      if(err.response) {
+        console.log(err.response.data.mensagem);
+      }else{
+        console.log("ERRO: Tente mais tarde!");
+      }
+    });
   }
 
  // Envia a Mensagem para o Back-end
@@ -87,15 +112,15 @@ function App() {
       {!logado ? 
       <Conteudo>
         <Header>Meu chat sobre...</Header>
-        <Form>
+        <Form onSubmit={conectarSala}>
           <Campo>
-            <Label>Nome: </Label>
+            <Label>E-mail: </Label>
             <Input 
               type="text" 
-              placeholder="Nome" 
-              name="nome" 
-              value={nome} 
-              onChange={(texto) => {setNome(texto.target.value)}} 
+              placeholder="E-mail" 
+              name="email" 
+              value={email} 
+              onChange={(texto) => {setEmail(texto.target.value)}} 
             /> 
           </Campo>
           <Campo>
@@ -110,7 +135,7 @@ function App() {
               <option value="4">PHP</option>
             </Select>
           </Campo>
-          <BtnAcessar onClick={conectarSala}>Acessar</BtnAcessar>
+          <BtnAcessar>Acessar</BtnAcessar>
         </Form>
       </Conteudo>
       : 

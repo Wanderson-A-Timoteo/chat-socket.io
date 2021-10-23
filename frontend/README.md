@@ -32,3 +32,7 @@ npm start
  ```
  npm install --save styled-components
  ```
+- Instalar axios
+```
+npm install --save axios
+```
