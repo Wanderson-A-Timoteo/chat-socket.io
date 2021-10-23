@@ -36,3 +36,8 @@ npm start
 ```
 npm install --save axios
 ```
+- Criar o Scroll
+```
+npm install --save react-scroll-to-bottom
+```
+

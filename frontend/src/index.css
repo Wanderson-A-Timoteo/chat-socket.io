@@ -4,13 +4,16 @@
   box-sizing: border-box;
   text-decoration: none;
 }
-
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif; 
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
   padding: 0 10px;
+}
+.scrollMsg{
+  height: 370px;
+  width: 100%;
 }

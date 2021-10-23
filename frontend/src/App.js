@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
-import { 
-  Container, 
-  Conteudo, 
-  Header, 
-  Form, 
-  Campo, 
-  Label, 
-  Input, 
-  Select, 
-  BtnAcessar, 
-  HeaderChat, 
-  ImgUsuario, 
-  NomeUsuario,
-  ChatBox, 
-  ConteudoChat,
-  MsgEnviada,
-  DetMsgEnviada,
-  TextoMsgEnviada,
-  MsgRecebida,
-  DetMsgRecebida,
-  TextoMsgRecebida,
-  FooterChat,
-  EnviarMsg,
-  CampoMsg,
-  BtnEnviarMsg } from './styles/styles';
-  import api from './config/configApi';
+import ScrollToBottom from 'react-scroll-to-bottom';
+
+import { Container, Conteudo, Header, Form, Campo, Label, Input, Select, BtnAcessar, HeaderChat, ImgUsuario, NomeUsuario, ChatBox, ConteudoChat, MsgEnviada, DetMsgEnviada, TextoMsgEnviada, MsgRecebida, DetMsgRecebida, TextoMsgRecebida, EnviarMsg, CampoMsg, BtnEnviarMsg, AlertErro } from './styles/styles';
+
+import api from './config/configApi';
 
 let socket;
 
@@ -34,22 +13,28 @@ function App() {
   const ENDPOINT = "http://localhost:8000/";
 
   const [logado, setLogado] = useState(false);
-  const [setUsuarioId] = useState(" ");
-  const [nome, setNome] = useState(" ");
-  const [email, setEmail] = useState(" ");
-  const [sala, setSala] = useState(" ");
+  const [usuarioId, setUsuarioId] = useState("");
+  const [email, setEmail] = useState("");
+  const [nome, setNome] = useState("");
+  const [sala, setSala] = useState("");
+  const [salas, setSalas] = useState([]);
 
-  // const [logado, setLogado] = useState(true);
-  // const [nome, setNome] = useState("Wanderson");
-  // const [sala, setSala] = useState("1");
+  /*const [logado, setLogado] = useState(true);
+  const [nome, setNome] = useState("Wanderson");
+  const [sala, setSala] = useState("1");*/
 
-  const [mensagem, setMensagem] = useState(" "); // Para enviar mensagem
-  const [listaMensagem, setListaMensagem] = useState([]); // Para receber mensagem
+  const [mensagem, setMensagem] = useState("");
+  const [listaMensagem, setListaMensagem] = useState([]);
 
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: ""
+  });
 
   useEffect(() => {
     socket = socketIOClient(ENDPOINT);
-  },[]);
+    listarSalas();
+  }, []);
 
   useEffect(() => {
     socket.on("receber_mensagem", (dados) => {
@@ -57,16 +42,36 @@ function App() {
     });
   });
 
- // Envia a sala para o Back-end
+  const listarSalas = async () => {
+    await api.get('/listar-sala')
+    .then((response) => {
+      setSalas(response.data.salas);
+      console.log(response);
+    }).catch((err) => {
+      if(err.response){
+        setStatus({
+          type: 'erro',
+          mensagem: err.response.data.mensagem
+        });
+      }else{
+        setStatus({
+          type: 'erro',
+          mensagem: "Erro: Tente mais tarde"
+        });
+      }
+    });
+  }
+
+   // Envia a sala para o Back-end
   const conectarSala = async e => {
     e.preventDefault();
 
-    console.log("Acessou a sala " + sala + " com o e-mail " + email);
-    
+    console.log("Acessou a sala " + sala + " com o email " + email);
+
     const headers = {
       'Content-Type': 'application/json'
-    }  
-    
+    }
+
     await api.post('/validar-acesso', {email}, {headers})
     .then((response) => {
       console.log(response.data.mensagem);
@@ -76,25 +81,52 @@ function App() {
       setNome(response.data.usuario.nome);
       setUsuarioId(response.data.usuario.id);
       setLogado(true);
-      // Metodo para enviar para o Back-end 
+      // Metodo para enviar para o Back-end
       socket.emit("sala_conectar", sala);
+      listarMensagens();
     }).catch((err) => {
-      if(err.response) {
-        console.log(err.response.data.mensagem);
+      if(err.response){
+        setStatus({
+          type: 'erro',
+          mensagem: err.response.data.mensagem
+        });
       }else{
-        console.log("ERRO: Tente mais tarde!");
+        setStatus({
+          type: 'erro',
+          mensagem: "Erro: Tente mais tarde!"
+        });
       }
     });
   }
 
- // Envia a Mensagem para o Back-end
-  const enviarMensagem = async () => {
+  const listarMensagens = async () => {
+    await api.get("/listar-mensagens/" + sala)
+    .then((response) => {
+      console.log(response);
+      console.log(response.data.mensagens);
+      //setListaMensagem([...listaMensagem, response.data.mensagens]);
+      setListaMensagem(response.data.mensagens);
+    }).catch((err)=>{
+      if(err.response){
+        console.log(err.response.data.mensagem);
+      }else{
+        console.log("Erro: Tente mais tarde!");
+      }
+    });
+  }
+  // Envia a Mensagem para o Back-end
+  const enviarMensagem = async e => {
+    e.preventDefault();
+
     console.log("Mensagem: " + mensagem);
     const conteudoMensagem = {
       sala,
       conteudo: {
-        nome,
-        mensagem
+        mensagem,
+        usuario: {
+          id: usuarioId,
+          nome
+        }
       }
     }
     console.log(conteudoMensagem);
@@ -102,88 +134,72 @@ function App() {
     // Metodo para enviar para o Back-end 
     await socket.emit("enviar_mensagem", conteudoMensagem);
     // Para receber broadcasting com as mensagens da sala
-    setListaMensagem([ ...listaMensagem, conteudoMensagem.conteudo]);
+    setListaMensagem([...listaMensagem, conteudoMensagem.conteudo]);
     setMensagem("");
   }
 
   return (
     <Container>
-      
-      {!logado ? 
-      <Conteudo>
-        <Header>Meu chat sobre...</Header>
-        <Form onSubmit={conectarSala}>
-          <Campo>
-            <Label>E-mail: </Label>
-            <Input 
-              type="text" 
-              placeholder="E-mail" 
-              name="email" 
-              value={email} 
-              onChange={(texto) => {setEmail(texto.target.value)}} 
-            /> 
-          </Campo>
-          <Campo>
-            <Label>Sala: </Label>
-            {/* <input type="text" placeholder="Sala" value={sala} onChange={(text) => {setSala(text.target.value)}
-            } /> <br /><br /> */}
-            <Select name="sala" value={sala} onChange={texto => setSala(texto.target.value)}>
-              <option value="">Selecione</option>
-              <option value="1">Node.js</option>
-              <option value="2">React.js</option>
-              <option value="3">React Native</option>
-              <option value="4">PHP</option>
-            </Select>
-          </Campo>
-          <BtnAcessar>Acessar</BtnAcessar>
-        </Form>
-      </Conteudo>
-      : 
-      <ConteudoChat>
-        <HeaderChat>
-          <ImgUsuario src="h23.jpg" alt={nome} />
-          <NomeUsuario>{nome}</NomeUsuario>
-        </HeaderChat>
+      {!logado ?
+        <Conteudo>
+          <Header>Meu chat sobre...</Header>
+          <Form onSubmit={conectarSala}>
+            {status.type === 'erro' ? <AlertErro>{status.mensagem}</AlertErro> : ""}
+            <Campo>
+              <Label>E-mail: </Label>
+              <Input type="text" placeholder="E-mail" name="email" value={email} onChange={(texto) => { setEmail(texto.target.value) }} />
+            </Campo>
 
-        <ChatBox>
-          {listaMensagem.map((msg, key) => {
-            return(
-              <div  key={key}>
-                {nome === msg.nome ? 
-                  <MsgEnviada>
-                    <DetMsgEnviada>
-                      <TextoMsgEnviada>
-                        {msg.nome} : {msg.mensagem}
-                      </TextoMsgEnviada>
-                    </DetMsgEnviada>
-                  </MsgEnviada> 
-                  : 
-                  <MsgRecebida>
-                    <DetMsgRecebida>
-                      <TextoMsgRecebida>
-                        {msg.nome} : {msg.mensagem}
-                    </TextoMsgRecebida>
-                    </DetMsgRecebida>
-                  </MsgRecebida>
-                }
-              </div>
-            )
-          })}
-        </ChatBox>
+            <Campo>
+              <Label>Sala: </Label>
+              <Select name="sala" value={sala} onChange={texto => setSala(texto.target.value)}>
+                <option value="">Selecione</option>
+                {salas.map((sala) => {
+                  return (
+                    <option value={sala.id} key={sala.id}>{sala.nome}</option>
+                  )
+                })}
+              </Select>
+            </Campo>
 
-        <FooterChat>
-          <EnviarMsg>
-            <CampoMsg 
-              type="text" 
-              name="mensagem" 
-              value={mensagem} 
-              placeholder="Mensagem..." 
-              onChange={(texto) => {setMensagem(texto.target.value)}} 
-            />
-            <BtnEnviarMsg onClick={enviarMensagem}>Enviar</BtnEnviarMsg>
+            <BtnAcessar>Acessar</BtnAcessar>
+          </Form>
+        </Conteudo>
+        :
+        <ConteudoChat>
+          <HeaderChat>
+            <ImgUsuario src="h23.jpg" alt={nome} />
+            <NomeUsuario>{nome}</NomeUsuario>
+          </HeaderChat>
+          <ChatBox>
+            <ScrollToBottom className="scrollMsg">
+            {listaMensagem.map((msg, key) => {
+              return (
+                <div key={key}>
+                  {usuarioId === msg.usuario.id ?
+                    <MsgEnviada>
+                      <DetMsgEnviada>
+                        <TextoMsgEnviada>{msg.usuario.nome}: {msg.mensagem}</TextoMsgEnviada>
+                      </DetMsgEnviada>
+                    </MsgEnviada>
+                    :
+                    <MsgRecebida>
+                      <DetMsgRecebida>
+                        <TextoMsgRecebida>{msg.usuario.nome}: {msg.mensagem}</TextoMsgRecebida>
+                      </DetMsgRecebida>
+                    </MsgRecebida>
+                  }
+                </div>
+              )
+            })}
+            </ScrollToBottom>
+          </ChatBox>
+          <EnviarMsg onSubmit={enviarMensagem}>            
+            <CampoMsg type="text" name="mensagem" placeholder="Mensagem..." value={mensagem} onChange={(texto) => { setMensagem(texto.target.value) }} />
+
+            <BtnEnviarMsg>Enviar</BtnEnviarMsg>
           </EnviarMsg>
-        </FooterChat>
-      </ConteudoChat>
+        </ConteudoChat>
       }
     </Container>
   );
