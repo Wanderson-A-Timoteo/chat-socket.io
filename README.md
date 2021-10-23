@@ -141,11 +141,12 @@ expo install expo-location
 Tela inicial do sistema.
 
 <h1 align="center">
-    <img alt="Chat-Socket.io" title="Chat-Entrar" src=".github/Chat-Entrar.png" />
+    <img alt="Chat-Entrar" title="Chat-Entrar" src=".github/Chat-Entrar.png" />
 </h1>
 
+Tela de mensagens do sistema.
 <h1 align="center">
-    <img alt="Chat-Socket.io" title="Chat-Socket.io" src=".github/Chat.png" />
+    <img alt="Chat-Msg" title="Chat-Msg" src=".github/Chat-Msg.png" />
 </h1>
 
 <!-- <p align="center">
