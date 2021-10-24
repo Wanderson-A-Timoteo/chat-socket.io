@@ -31,107 +31,84 @@ As pessoas nas imagens usadas no sistema não existem, foram retiradas do site!
 
 - Criando o projeto
 ```
-npx create-next-app devfreela
+npx create-react-app NomeDoProjeto
 ```
-- Criado arquivo de configuração do TypeScript `tsconfig.json`
-- Instalado TypeScript e tipagem do React
+- Socket.io é uma biblioteca Javascript para aplicativos da web em tempo real
+```
+ npm install socket.io-client
  ```
-  npm i typescript @types/react
+ - Transforma o CSS em componentes
+ ```
+ npm install --save styled-components
+ ```
+- Instalar axios
 ```
-- Instalado as dependências
+npm install --save axios
 ```
-npm i @material-ui/core@next @emotion/react @emotion/styled axios react-input-mask
+- Criar o Scroll
+```
+npm install --save react-scroll-to-bottom
 ```
 <br>
 ---
 
 ### Backend
-- Criando o projeto
+- Criar o arquivo package
 ```
-composer create-project laravel/laravel devfreela
-``` 
-- Criado arquivo de controller DevfreelaController
-```  
-php artisan make:controller DevfreelaController
-``` 
-- Executado as migrações no banco de dados
-``` 
-php artisan migrate
-``` 
-- Criado novas migração para a tabela devfreela no banco de dados
-``` 
-php artisan make:migration create_devfreelas_table
-``` 
-- Criado modelo Devfreela
-```    
-php artisan make:model Devfreela
-``` 
-- Instalado a dependência para usar o Laravel HTTP Client
-```   
-composer require guzzlehttp/guzzle
-``` 
-- Criar link simbólico para o Storage. Dentro da pasta public da aplicação execute no Windows usando prompt em modo administrador:
-```     
-mklink /D public ..\storage\app\public`
-``` 
-- Instalado o pacote de tradução para pt_BR
-```  
-composer require lucascudo/laravel-pt-br-localization --dev
+npm init
+```
+- Gerenciar as requisições, rotas e URLs, entre outras funcionalidades
+```
+npm install express
+```
+- Instalar a dependencia de forma global, "-g" significa globalmente. Executar o comando através do pronpt de comando, executar somente se nunca instalou a dependencia na maquina, após instalar, reiniciar a maquina.
+```
+npm install -g nodemon
+```
 
-php artisan vendor:publish --tag=laravel-pt-br-localization
-```     
-- Instalado o pacote de mascaras no projeto
-```     
-composer require clemdesign/php-mask
-``` 
+- Instalar a dependencia como desenvolvedor para reiniciar o servidor sempre que houver alteração no código-fonte.
+```
+npm install --save-dev nodemon
+```
+
+- Rodar o projeto usando o nodemon
+```
+nodemon app.js
+```
+
+- Socket.io é uma biblioteca Javascript para aplicativos da web em tempo real.
+```
+npm install socket.io
+```
+- Permite acesso a API
+```
+npm install cors
+```
+
+- Instalar o Banco de Dados MySQL
+
+- Verificar o Banco de Dados MySQL no pronpt de comando
+```
+mysql -h localhost -u root -p
+```
+
+- Instalar o Workbench para gerenciar o Banco de Dados de forma gráfica
+
+- Sequelize é uma biblioteca Javascript que facilita o gerenciamento de um Banco de Dados SQL
+```
+npm install --save sequelize
+```
+
+- Instalar o drive do Banco de Dados MySQL
+```
+npm install --save mysql2
+```
 ---
 <br>
 
 ### Mobile
 <br>
-
-- Instalando o Expo Global
-```
-npm i -g expo-cli
-```
-<br>
-
-- Criando o projeto mobile
-```
-expo init NomeProjeto
-```
-<br>
-
-- Selecionado opção de desenvolvimento
-```
-blank ( TypeScript )
-```
-<br>
-
-- Em caso de erro no Windows, executar:
-```
-set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-<br>
-
-- Instalando dependências
-```
-npm i @emotion/react @emotion/native axios @react-native-navigation/native react-native-masked-text react-native-paper
-```
-<br>
-
-- Instalando dependências do React Navigation
-```
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view @react-navigation/stack
-```
-
-<br>
-
-- Instalado o pacote de localização do Expo
-```     
-expo install expo-location
-``` 
-<br>
+Em desenvolvimento
 
 ---
 
@@ -173,9 +150,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Nodemon](https://nodemon.io/)
 - [Styled Components](https://styled-components.com/)
 - [React Scroll to Bottom](https://www.npmjs.com/package/react-scroll-to-bottom)
-- [Expo](https://expo.dev/)
+<!-- - [Expo](https://expo.dev/)
 - [React Native](https://reactnative.dev/)
-- [React Native Paper](https://reactnativepaper.com/)
+- [React Native Paper](https://reactnativepaper.com/) -->
 
 
 
@@ -331,7 +308,7 @@ Feito com ♥ by
     <img alt="Celke-Logo" title="Celke-Logo" src=".github/Celke-Logo.png" />
 </h1>
 
-- Projeto desenvolvido durante a [Imersão React, Node e React Native 12.0](https://celke.com.br/home).
+- Projeto desenvolvido durante a [Imersão Node.js, React e React Native 12.0](https://celke.com.br/home).
 
 - Agradecimento ao [Cesar Celke](https://www.instagram.com/celkecursos/) por compartilhar conteúdo relevante e com qualidade de ensino.
 
