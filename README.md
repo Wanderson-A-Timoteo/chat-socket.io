@@ -108,7 +108,33 @@ npm install --save mysql2
 
 ### Mobile
 <br>
-Em desenvolvimento
+
+- Criar o projeto com React Native usando expo
+```
+expo init mobile
+```
+- Executar o projeto 
+```
+npm start
+```
+- Socket.IO é uma biblioteca JavaScript para aplicativos da web em tempo real
+```
+npm install socket.io-client
+```
+
+- Realizar chamada para API
+```
+npm install --save axios
+```
+- Criar campo do tipo radio
+```
+npm install react-native-paper
+```
+- Transforma o CSS em componentes
+```
+npm install --save styled-components
+```
+
 
 ---
 
@@ -121,18 +147,29 @@ Tela inicial do sistema.
     <img alt="Chat-Entrar" title="Chat-Entrar" src=".github/Chat-Entrar.png" />
 </h1>
 
-Tela de mensagens do sistema.
+Tela de mensagens do sistema web.
 <h1 align="center">
     <img alt="Chat-Msg" title="Chat-Msg" src=".github/Chat-Msg.png" />
 </h1>
 
-<!-- <p align="center">
-    <img alt="devFreela" title="devFreela" src="https://github.com/Wanderson-A-Timoteo/devfreela/blob/main/.github/devFreela-frontend.PNG?raw=true" />
-</p> -->
+Tela inicial do sistema mobile usando expo.
+<h1 align="center">
+    <img alt="Mobile03" title="Mobile03" width="300" height="550" src=".github/Mobile03.jpeg" />
+</h1>
+
+### Conversa do sistema frontend com mobile
+
+Tela de mensagens do sistema web.
+<h1 align="center">
+    <img alt="Mobile01" title="Mobile01" src=".github/Mobile01.png" />
+</h1>
+
+Tela de mensagens do sistema mobile usando expo.
+<h1 align="center">
+    <img alt="Mobile02" title="Mobile02" width="300" height="550" src=".github/Mobile02.jpeg" />
+</h1>
+
 <br>
-
----
-
 <br>
 
 ## 🚀 Tecnologias
@@ -150,9 +187,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Nodemon](https://nodemon.io/)
 - [Styled Components](https://styled-components.com/)
 - [React Scroll to Bottom](https://www.npmjs.com/package/react-scroll-to-bottom)
-<!-- - [Expo](https://expo.dev/)
+- [Expo](https://expo.dev/)
 - [React Native](https://reactnative.dev/)
-- [React Native Paper](https://reactnativepaper.com/) -->
+- [React Native Paper](https://reactnativepaper.com/)
 
 
 
@@ -187,7 +224,7 @@ Você precisará executar 3 passos: <br>
 Acessar o projeto frontend na pasta `frontend` digitar no cmd a seguinte instrução: **(dentro da pasta `frontend` do projeto clonado)**
 
 ```
-> npm install
+npm install
 ```
 
 Ao digitar a instrução acima, automaticamente ele irá baixar todas as dependências listadas e definidas no arquivo package.json:

@@ -82,7 +82,7 @@ function App() {
       setUsuarioId(response.data.usuario.id);
       setLogado(true);
       // Metodo para enviar para o Back-end
-      socket.emit("sala_conectar", sala);
+      socket.emit("sala_conectar", Number(sala));
       listarMensagens();
     }).catch((err) => {
       if(err.response){
@@ -120,7 +120,7 @@ function App() {
 
     console.log("Mensagem: " + mensagem);
     const conteudoMensagem = {
-      sala,
+      sala: Number(sala),
       conteudo: {
         mensagem,
         usuario: {

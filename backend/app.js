@@ -151,7 +151,7 @@ io.on("connection", (socket) => {
     // Recebe a seleção de sala do front-end, usando o metodo On
     socket.on("sala_conectar", (dados) => {
         console.log("Sala selecionada: " + dados);
-        socket.join(dados);
+        socket.join(Number(dados));
     });
 
     // Recebe a Mensagem do front-end, usando o metodo On
@@ -165,6 +165,6 @@ io.on("connection", (socket) => {
             usuarioId: dados.conteudo.usuario.id
         });
 
-        socket.to(dados.sala).emit("receber_mensagem", dados.conteudo);
+        socket.to(Number(dados.sala)).emit("receber_mensagem", dados.conteudo);
     });
 });
