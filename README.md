@@ -153,23 +153,26 @@ Tela de mensagens do sistema web.
 </h1>
 
 Tela inicial do sistema mobile usando expo.
-<h1 align="center">
-    <img alt="Mobile03" title="Mobile03" width="300" height="550" src=".github/Mobile03.jpeg" />
-</h1>
+<p align="center">
+    <img alt="Mobile03" title="Mobile03" width="300" height="550" src="https://github.com/Wanderson-A-Timoteo/chat-socket.io/blob/main/.github/mobile03.jpeg?raw=true" />
+</p>
 
 ### Conversa do sistema frontend com mobile
 
 Tela de mensagens do sistema web.
-<h1 align="center">
-    <img alt="Mobile01" title="Mobile01" src=".github/Mobile01.png" />
-</h1>
+<p align="center">
+    <img alt="Mobile01" title="Mobile01" src="https://github.com/Wanderson-A-Timoteo/chat-socket.io/blob/main/.github/mobile01.png?raw=true" />
+</p>
 
 Tela de mensagens do sistema mobile usando expo.
-<h1 align="center">
-    <img alt="Mobile02" title="Mobile02" width="300" height="550" src=".github/Mobile02.jpeg" />
-</h1>
+<p align="center">
+    <img alt="Mobile01" title="Mobile01" width="300" height="550" src="https://github.com/Wanderson-A-Timoteo/chat-socket.io/blob/main/.github/mobile02.jpeg?raw=true" />
+</p>
 
 <br>
+
+---
+
 <br>
 
 ## 🚀 Tecnologias
@@ -224,7 +227,7 @@ Você precisará executar 3 passos: <br>
 Acessar o projeto frontend na pasta `frontend` digitar no cmd a seguinte instrução: **(dentro da pasta `frontend` do projeto clonado)**
 
 ```
-npm install
+> npm install
 ```
 
 Ao digitar a instrução acima, automaticamente ele irá baixar todas as dependências listadas e definidas no arquivo package.json:
